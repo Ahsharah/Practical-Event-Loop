@@ -1,72 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Interactive Prime Calculator</title>
-<style>
-      body { font-family: Arial, sans-serif; max-width: 800px; margin: 20px auto; padding: 0 20px; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Prime Calculator</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 20px auto; padding: 0 20px; }
         #output { border: 1px solid #ddd; padding: 10px; min-height: 100px; margin-top: 10px; }
         #status { margin-top: 10px; font-weight: bold; }
     </style>
 </head>
 <body>
-<h1>Interactive Prime Calculator</h1>
-<label for="maxNumber">Calculate primes up to: </label>
-<input type="number" id="maxNumber" value="100" min="2">
-<button id="startButton">Start Calculation</button>
-<div id="status">Ready to calculate</div>
-<div id="output"></div>
+    <h1>Interactive Prime Calculator</h1>
+    <label for="maxNumber">Calculate primes up to: </label>
+    <input type="number" id="maxNumber" value="100" min="2">
+    <button id="startButton">Start Calculation</button>
+    <div id="status">Ready to calculate</div>
+    <div id="output"></div>
 
     <script>
-       // References to HTML elements
-const outputElement = document.getElementById('output');    // Where prime numbers will be displayed
-const statusElement = document.getElementById('status');    // Where calculation status will be shown
-const startButton = document.getElementById('startButton'); // Button to start calculation
-const maxNumberInput = document.getElementById('maxNumber');// Input for max number to check
+        // Wrap all JavaScript code in a DOMContentLoaded event listener
+        document.addEventListener('DOMContentLoaded', function() {
+            // References to HTML elements
+            const outputElement = document.getElementById('output');
+            const statusElement = document.getElementById('status');
+            const startButton = document.getElementById('startButton');
+            const maxNumberInput = document.getElementById('maxNumber');
 
-// Function to check if a number is prime
-function isPrime(num) {
-    for (let i = 2; i * i <= num; i++) {  // Check divisibility up to square root of num
-        if (num % i === 0) return false;  // If divisible, it's not prime
-    }
-    return num > 1;  // 1 is not considered prime
-}
+            // Function to check if a number is prime
+            function isPrime(num) {
+                for (let i = 2; i * i <= num; i++) {
+                    if (num % i === 0) return false;
+                }
+                return num > 1;
+            }
 
-// Function to calculate primes using deferred execution
-function calculatePrimesDeferred(n, current) {
-    if (current <= n) {  // If we haven't reached the max number yet
-        if (isPrime(current)) {  // Check if current number is prime
-            outputElement.innerHTML += current + ' ';  // If prime, add to output
-        }
-        // Update status with current progress
-        statusElement.textContent = 'Calculating... Current number: ' + current;
-        // Schedule next number check in next event loop iteration
-        setTimeout(() => calculatePrimesDeferred(n, current + 1), 0);
-    } else {
-        onCalculationComplete();  // If done, call completion function
-    }
-}
+            // Function to calculate primes using deferred execution
+            function calculatePrimesDeferred(n, current) {
+                if (current <= n) {
+                    if (isPrime(current)) {
+                        outputElement.innerHTML += current + ' ';
+                    }
+                    statusElement.textContent = 'Calculating... Current number: ' + current;
+                    setTimeout(() => calculatePrimesDeferred(n, current + 1), 0);
+                } else {
+                    onCalculationComplete();
+                }
+            }
 
-// Function to handle completion of calculation
-function onCalculationComplete() {
-    statusElement.textContent = 'Calculation complete!';  // Update status
-    startButton.disabled = false;  // Re-enable start button
-}
+            // Function to handle completion of calculation
+            function onCalculationComplete() {
+                statusElement.textContent = 'Calculation complete!';
+                startButton.disabled = false;
+            }
 
-// Add click event listener to start button
-startButton.addEventListener('click', function() {
-    // Convert input value to a number
-    let maxNumber = Number(maxNumberInput.value);
-    
-    // Validate input
-    if (isNaN(maxNumber) || maxNumber < 2) {
-        alert('Please enter a valid number greater than or equal to 2');
-        return;
-    }
-    
-    outputElement.innerHTML = '';  // Clear previous output
-    this.disabled = true;  // Disable start button during calculation
-    statusElement.textContent = 'Calculation in progress...';  // Update status
-    calculatePrimesDeferred(maxNumber, 2);  // Start calculation from 2
-});
+            // Add click event listener to start button
+            startButton.addEventListener('click', function() {
+                let maxNumber = Number(maxNumberInput.value);
+                
+                if (isNaN(maxNumber) || maxNumber < 2) {
+                    alert('Please enter a valid number greater than or equal to 2');
+                    return;
+                }
+                
+                outputElement.innerHTML = '';
+                this.disabled = true;
+                statusElement.textContent = 'Calculation in progress...';
+                calculatePrimesDeferred(maxNumber, 2);
+            });
+        });
+    </script>
+</body>
+</html>
