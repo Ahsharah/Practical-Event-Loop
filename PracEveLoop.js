@@ -185,5 +185,18 @@ function isPrime(num) {
 
 // Step 3: Function to calculate prime up to n (initial implementation)
 function calculatePrimes(n) {
-    for(let i =)
+    for(let i = 1; i <= n; i++)
+        if (isPrime)(i)
+}
+// Step 4: Deferred prime calculation function
+function calculatePrimesDeferred(n, current = 2) {
+    if (current <= n) {
+        if (isPrime(current)) {
+            outputElement.innerHTML += current + ' ';
+        }
+        setTimeout(() => calculatePrimesDeferred(n, current + 1), 0);
+    } else {
+        // Instead of alert, call a completion function
+        onCalculationComplete();
+    }
 }
