@@ -72,5 +72,24 @@ const factorial = (n) => {
 
   // Step 2: Crate a simple recursive function
   function measureCallStackSize() {
+
+    // Increment counter with each function call
+    callStackSize++;
+
+    // Recursively call the function
+    // This will cintunue until hitting a => Stack Overflow
+    measureCallStackSize();
+
+  }
+
+  // Step 3: Wrap the initial function call in a try/catch block
+  try{
+    // Attempting to call our recursive function
+    measureCallStackSize();
+
+
+
+
+
     
   }
