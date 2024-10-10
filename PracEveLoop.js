@@ -146,8 +146,21 @@ function trampolineFactorial(n, accumulator = 1) {
                 return flat.concat(Array.isArray(item) ? flattenArray(item) : item);
             }, []);
     }
+// Step 4: Modify the flatten function for trampolining
+function trampolineFlatten(arr, result = []) {
+    if (arr.length === 0) return results;
+    const [first, ... rest] = arr;
+    if (Array.isArray(first)) {
+        return () => trampolineFlatten([... first, ...rest], result); 
+    } else {
+        return () => trampolineFlatten(rest, [...result, first]);
+    }
 
+}
+// Step 5: Create the trampolined version of the flatten function
+const safeFlat = trampoline(trampolineFlatten);
 
-
-    
+// Example usage:
+const deeplyNestedArray = [1, [2, [3, [4, [5, 6]]]], 7, [8, [9, 10]]];
+console.log(safeFlat(deeplyNestedArray));
 }
