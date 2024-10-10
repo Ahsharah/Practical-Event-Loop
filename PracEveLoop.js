@@ -91,3 +91,21 @@ const factorial = (n) => {
 console.log("Stack Overflow Error: ${error.message}");
 console.log("Maximum call stack size: ${callStackSize}");
   }
+
+  // Step 5: Explanation of the results
+/*
+    What this code does:
+    1. I start a counter at 0.
+    2. I define a function that increments the counter and calls itself.
+    3. I call this function inside a try/catch block. (ref: )
+    4. The function calls itself repeatedly, adding to the call stack each time.
+    5. Eventually, the call stack reaches its maximum size and throws an error.
+    6. I catch this error and log the final count, which represents the maximum call stack size.
+
+    This demonstrates:
+    - How recursive functions can lead to stack overflow (via example)
+    - The importance of ('base cases') in recursive functions to address/prevent stack overflow
+    - How to measure the call stack size in a JavaScript environment
+    - The use of try/catch for handling potential stack overflow errors for JS developers
+*/
+
