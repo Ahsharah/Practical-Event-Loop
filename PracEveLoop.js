@@ -95,12 +95,12 @@ console.log("Maximum call stack size: ${callStackSize}");
   // Step 5: Explanation of the results
 /*
     What this code does:
-    1. I start a counter at 0.
-    2. I define a function that increments the counter and calls itself.
-    3. I call this function inside a try/catch block. (ref: )
+    1. Start a counter at 0.
+    2. Define a function that increments the counter and calls itself.
+    3. Call this function inside a try/catch block. (ref: )
     4. The function calls itself repeatedly, adding to the call stack each time.
     5. Eventually, the call stack reaches its maximum size and throws an error.
-    6. I catch this error and log the final count, which represents the maximum call stack size.
+    6. Catch this error and log the final count, which represents the maximum call stack size.
 
     This demonstrates:
     - How recursive functions can lead to stack overflow (via example)
@@ -109,3 +109,45 @@ console.log("Maximum call stack size: ${callStackSize}");
     - The use of try/catch for handling potential stack overflow errors for JS developers
 */
 
+// Part II: Trampolines
+
+// Step 1: Implement a trampoline function
+function trampoline(fn) {
+    return function(...args) {
+        let result = fin(args);
+        while (typeof result ==='function') {
+            results = results();
+
+        }
+        return result;
+    };
+}
+
+// Step 2: Ex. of trampolining a factorial function
+// 2a: Original recursive factorial function (prone to stack overflow)
+function factorial(n) {
+    if (n <= 1) return n * factorial(n -1);
+}
+
+// 2b: Modified factorial function for trampolining
+function trampolineFactorial(n, accumulator = 1) {
+    if (n <= 1) return accumulator;
+    return () => trampolineFactorial(n - 1, n * accumulator);
+
+    // 2c: Create the trampoline version of the factorial function
+    const safeFact = tampoline(trampolineFactorial);
+
+    // console.log usage:
+    console.log(safeFact(20000)); // will this work w/o stack overflow(?)
+
+    // Step 3: Implement a recursive array flatterning function
+    function flatterArray(arr) {
+            return arr.reduce((flat, item) => {
+                return flat.concat(Array.isArray(item) ? flattenArray(item) : item);
+            }, []);
+    }
+
+
+
+    
+}
