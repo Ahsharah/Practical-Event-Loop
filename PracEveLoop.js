@@ -88,10 +88,6 @@ const factorial = (n) => {
     measureCallStackSize();
   } catch (error) {
     // Step 4: Log the error and value of the counter variable
-  }
-
-
-
-
-
+console.log("Stack Overflow Error: ${error.message}");
+console.log("Maximum call stack size: ${callStackSize}");
   }
