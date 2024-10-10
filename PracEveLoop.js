@@ -61,3 +61,16 @@ const factorial = (n) => {
    * the principle of trampolining holds!
    */
   console.log(trampoline(facto(10000)))
+
+
+  // ALAB308A.1.1:
+
+  //Part I: Stack Overflow
+
+  // Step 1: Declare a global counter variable
+  let callStackSize = 0;
+
+  // Step 2: Crate a simple recursive function
+  function measureCallStackSize() {
+    
+  }
