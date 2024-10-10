@@ -1,17 +1,61 @@
-<!DOCTYPE html>
-<html> lang='en'>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Interactive Prime Calculator</title>
-        <style>
-            body { font-family: Arial, sans-serif; max-width: 800px; margin: 20px auto; padding: 0 20px; }
-            #output { border: 1px solid #ddd; padding: 10px; min-height: 100px; margin-top: 10px; }
-            #status { margin-top: 10px; font-weight: bold; }
-        </style>
-    </head>
-    <body>
-        
-        <script src="PracEveLoop.js" async defer></script>
-    </body>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Prime Calculator</title>
+<style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: 20px auto; padding: 0 20px; }
+    #output { border: 1px solid #ddd; padding: 10px; min-height: 100px; margin-top: 10px; }
+    #status { margin-top: 10px; font-weight: bold; }
+</style>
+</head>
+<body>
+<h1>Interactive Prime Calculator</h1>
+<label for="maxNumber">Calculate primes up to: </label>
+<input type="number" id="maxNumber" value="100" min="2">
+<button id="startButton">Start Calculation</button>
+<div id="status">Ready to calculate</div>
+<div id="output"></div>
+
+<script>
+    const outputElement = document.getElementById('output');
+    const statusElement = document.getElementById('status');
+    const startButton = document.getElementById('startButton');
+    const maxNumberInput = document.getElementById('maxNumber');
+
+    function isPrime(num) {
+        for (let i = 2, sqrt = Math.sqrt(num); i <= sqrt; i++) {
+            if (num % i === 0) return false;
+        }
+        return num > 1;
+    }
+
+    function calculatePrimesDeferred(n, current = 2) {
+        if (current <= n) {
+            if (isPrime(current)) {
+                outputElement.innerHTML += current + ' ';
+            }
+            statusElement.textContent = `Calculating... Current number: ${current}`;
+            setTimeout(() => calculatePrimesDeferred(n, current + 1), 0);
+        } else {
+            onCalculationComplete();
+        }
+    }
+
+    function onCalculationComplete() {
+        statusElement.textContent = 'Calculation complete!';
+        startButton.disabled = false;
+    }
+
+    startButton.addEventListener('click', function() {
+        const maxNumber = +maxNumberInput.value; // Using unary plus instead of parseInt
+        if (isNaN(maxNumber) || maxNumber < 2) {
+            alert('Please enter a valid number greater than or equal to 2');
+            return;
+        }
+        outputElement.innerHTML = '';
+        this.disabled = true;
+        statusElement.textContent = 'Calculation in progress...';
+        calculatePrimesDeferred(maxNumber);
+    });
+</script>
+</body>
 </html>
