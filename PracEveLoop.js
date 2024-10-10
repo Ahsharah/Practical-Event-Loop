@@ -213,3 +213,14 @@ function updateUIAfterTheCalulation() {
     document.getElementById('status').textContent = 'Calulation Complete!';
     document.getElementById('startButton'). disabled = false;
 }
+
+// Event listener for the start button function
+document.getElementById('startButton').addEventListener('click', function() {
+    // Clears previous output
+    outputElement.innerHTML = '';
+    // Update UI to show calculation is in progress
+    this.disabled = true;
+    document.getElementById('status').textContent = 'Calculation in progress...';
+    // Start the calculation
+    calculatePrimesDeferred(10000);
+});
