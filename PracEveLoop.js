@@ -200,3 +200,16 @@ function calculatePrimesDeferred(n, current = 2) {
         onCalculationComplete();
     }
 }
+
+// Function to run after calculation is complete
+function onCalculationComplete() {
+    console.log("Calculation finished!");
+    // Initiate any actions that depend upon the calulation being complete (reset User Interface/UI)
+    updateUIAfterTheCalulation();
+}
+
+// Update UI after calculation
+function updateUIAfterTheCalulation() {
+    document.getElementById('status').textContent = 'Calulation Complete!';
+    document.getElementById('startButton'). disabled = false;
+}
