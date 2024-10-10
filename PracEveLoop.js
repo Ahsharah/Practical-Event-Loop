@@ -70,7 +70,7 @@ const factorial = (n) => {
   // Step 1: Declare a global counter variable
   let callStackSize = 0;
 
-  // Step 2: Crate a simple recursive function
+  // Step 2: Create a simple recursive function
   function measureCallStackSize() {
 
     // Increment counter with each function call
@@ -163,4 +163,22 @@ const safeFlat = trampoline(trampolineFlatten);
 // Example usage:
 const deeplyNestedArray = [1, [2, [3, [4, [5, 6]]]], 7, [8, [9, 10]]];
 console.log(safeFlat(deeplyNestedArray));
+}
+ // Show and explain works and step, if time.
+
+
+ // Part 3: Deffered Execution
+
+ //Step 1: Create the HTML element to hold my text
+ 
+ document.body.innerHTML = '<div id="output"></div>';
+
+// Cache the HTML element into a JavaScript variable
+const outputElement = document.getElementById('output');
+
+// Step 2: Function to check if a number is prime
+function isPrime(num) {
+    for (let i = 2, sqrt = Math.sqrt(num); i <= sqrt; i++)
+        if (num % i === 0) return false; 
+    return num > 1;
 }
