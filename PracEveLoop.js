@@ -86,10 +86,12 @@ const factorial = (n) => {
   try{
     // Attempting to call our recursive function
     measureCallStackSize();
+  } catch (error) {
+    // Step 4: Log the error and value of the counter variable
+  }
 
 
 
 
 
-    
   }
