@@ -182,3 +182,8 @@ function isPrime(num) {
         if (num % i === 0) return false; 
     return num > 1;
 }
+
+// Step 3: Function to calculate prime up to n (initial implementation)
+function calculatePrimes(n) {
+    for(let i =)
+}
